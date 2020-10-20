@@ -25,7 +25,7 @@ def traverse_nodes(node, board, state, identity):
     if not leaf_node.untried_actions: #if the node still has untried actions we are at a leaf node
         best_child, best_state = None, None
         if not leaf_node.child_nodes: #edge case for if we are evaluating a node that corresponds to a finished game state.
-            return best_child, best_state
+            return best_child, leaf_state
         if board.current_player(leaf_state) != identity : #used for adjusting ucbt value
             opponents_turn = True
         for move, child in leaf_node.child_nodes.items():
@@ -122,9 +122,8 @@ def think(board, state):
 
         # Do MCTS - This is all you!
         leaf_node, current_state = traverse_nodes(node, board, sampled_game, identity_of_bot)
-        if leaf_node == None:
-            break
-        new_node, current_state = expand_leaf(leaf_node, board, current_state)
+        if leaf_node != None: #only none if we are on end game board
+            new_node, current_state = expand_leaf(leaf_node, board, current_state)
         current_state = rollout(board, current_state)
         result = rollout_result(board, identity_of_bot, current_state)
         backpropagate(new_node, result)
