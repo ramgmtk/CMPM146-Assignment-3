@@ -92,7 +92,8 @@ def backpropagate(node, won):
     """
     if node == None:
         return
-    node.wins += won
+    if won:
+        node.wins += 1
     node.visits += 1
     backpropagate(node.parent, won)
 
@@ -140,11 +141,11 @@ def think(board, state):
 def rollout_result(board, current_player, current_state):
     
     results = board.points_values(current_state)
-    """result = False
+    result = False
     if results[current_player] > 0:
         result = True
-    return result"""
-    return results[current_player]
+    return result
+    #return results[current_player]
 
 def upper_common_bound(node, parent_node, opponent_turn) :
     w = node.wins
