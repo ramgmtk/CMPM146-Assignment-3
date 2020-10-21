@@ -34,6 +34,7 @@ def traverse_nodes(node, board, state, identity):
                 current_ucbt = ucbt_of_child
                 best_child = child
                 best_state = board.next_state(leaf_state, move)
+             
         leaf_node, leaf_state = traverse_nodes(best_child, board, best_state, identity)
     
     return leaf_node, leaf_state
