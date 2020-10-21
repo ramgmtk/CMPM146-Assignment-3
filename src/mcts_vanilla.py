@@ -111,7 +111,8 @@ def think(board, state):
     root_node = MCTSNode(parent=None, parent_action=None, action_list=board.legal_actions(state))
     best_move = None
     most_visits = 0
-
+    win_rate = 0
+    
     for step in range(num_nodes):
         # Copy the game for sampling a playthrough
         sampled_game = state
@@ -127,10 +128,18 @@ def think(board, state):
         result = rollout_result(board, identity_of_bot, current_state)
         backpropagate(new_node, result)
         
-        if new_node.visits > most_visits:
+        """if new_node.visits > most_visits:
             most_visits = new_node.visits
-            best_move = new_node.parent_action
-    
+            best_move = new_node.parent_action"""
+    for move, child in root_node.child_nodes.items():
+        child_win_rate = child.wins/child.visits
+        if child_win_rate > win_rate :
+            win_rate = child_win_rate
+            best_move = move
+        if most_visits < child.visits:
+            if best_move == None:
+                best_move = move
+            most_visits = child.visits
     # Return an action, typically the most frequently used action (from the root) or the action with the best
     # estimated win rate.
     return best_move
