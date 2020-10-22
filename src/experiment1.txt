@@ -1,0 +1,55 @@
+CMPM146 Assignment 3 (P3) Experiment 1 Analysis
+Emmanuel Butor and Rammohan Ramanathan
+
+Experiment Setup:
+    - mcts_vanilla.py will be player 1 with a fixed tree size of 100 nodes
+        - This bot will be referred to as "vanilla"
+    - mcts_vanilla_expOne.py will be player 2 with the varying tree sizes (listed below)
+        - This bot will be referred to as "vanillaExpOne"
+
+    - The varying tree sizes will be 10 nodes, 50 nodes, 200 nodes, and 400 nodes
+
+    - 100 games will be played for each size, for a total of 400 games played
+
+    - p3_sim.py will be used to simulate all 100 games.
+
+    - Command used "python p3_sim.py mcts_vanilla mcts_vanilla_expOne"
+
+Experiment Findings:
+    - vanilla (100 nodes) vs vanillaExpOne (10 nodes)
+        - Results: 
+            - vanilla had 87 wins, vanillaExpOne had 12 wins, they had 1 draw
+            - It took 165.47 seconds
+
+    - vanilla (100 nodes) vs vanillaExpOne(50 nodes)
+        - Results:
+            - vanilla had 76 wins, vanillaExpOne had 23 wins, they had 1 draw
+            - It took 235.04 seconds
+
+    - vanilla (100 nodes) vs vanillaExpOne(200 nodes)
+        - Results:
+            - vanilla had 35 wins, vanillaExpOne had 63 wins, they had 2 draws
+            - It took 449.10 seconds
+
+    - vanilla (100 nodes) vs vanillaExpOne(400 nodes)
+        - Results:
+            - vanilla had 26 wins, vanillaExpOne had 72 wins, they had 2 draws
+            - It took 746.45 seconds
+
+Description of Results:
+    We see that as the number of nodes grows for vanillaExpOne, the number of
+wins increases as well over the four tests. The vanillaExpOne bot went from 12 wins
+in 100 games to having 72 wins in 100 games. This also agrees with the idea that
+larger search trees will result in better decision making, as the overall winner
+of the 100 games per test was the one who had the ability to make larger trees.
+A conclusion from the data is that the MCTS bot that can build larger trees is more
+likely to win on average the more games that are played.
+    A side effect of having larger trees is the issue of time. When vanillaExpOne had
+10-node tree size limit, the 100 games took 165.47 seconds, or about 1.6547 seconds per
+game. Once vanillaExpOne had a 400-node tree size limit, the 100 games took 746.45 seconds
+to complete, or 7.4645 seconds per game.
+    No conclusive answer was able to be found for how node tree sizes affect the number
+of draws, as there were not that many draws over the whole 400 games played.
+    The conclusion that we have arrived from this experiment is that larger search trees
+give MCTS bots the ability to make better decisions compared to MCTS bots with smaller
+trees. Larger trees also mean that more time is spent trying to search for the best action.
