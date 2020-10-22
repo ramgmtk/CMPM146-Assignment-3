@@ -28,18 +28,18 @@ def traverse_nodes(node, board, state, identity):
             return best_child, leaf_state
         if board.current_player(leaf_state) != identity : #used for adjusting ucbt value
             opponents_turn = True
-        #roulette_list = []
-        #weights = []
+        roulette_list = []
+        weights = []
         for move, child in leaf_node.child_nodes.items():
-            ucbt_of_child = upper_common_bound(child, leaf_node, opponents_turn)
-            #roulette_list.append((child, board.next_state(leaf_state, move)))
-            #weights.append(ucbt_of_child)
-            if current_ucbt < ucbt_of_child:
+            ucbt_of_child = roulette(child, leaf_node)
+            roulette_list.append((child, board.next_state(leaf_state, move)))
+            weights.append(ucbt_of_child)
+            """if current_ucbt < ucbt_of_child:
                 current_ucbt = ucbt_of_child
                 best_child = child
-                best_state = board.next_state(leaf_state, move)
-        #val = choices(roulette_list, weights)
-        #best_child, best_state = val[0]
+                best_state = board.next_state(leaf_state, move)"""
+        val = choices(roulette_list, weights)
+        best_child, best_state = val[0]
         leaf_node, leaf_state = traverse_nodes(best_child, board, best_state, identity)
     
     return leaf_node, leaf_state
@@ -83,7 +83,7 @@ def rollout(board, state):
     new_state = state
        
     while not board.is_ended(new_state): #this should be changed if we want a bound for how far we simulate
-        val = float('-inf')
+        """val = float('-inf')
         best_move = None
         move_list = board.legal_actions(new_state)
         rollout_num = 5 if len(move_list) > 5 else len(move_list)
@@ -94,9 +94,9 @@ def rollout(board, state):
             if heuristic_val > val:
                 val = heuristic_val
                 best_move = move
-        new_state = board.next_state(new_state, best_move)         
-        #move = choice(board.legal_actions(new_state))
-        #new_state = board.next_state(new_state, move)
+        new_state = board.next_state(new_state, best_move)"""         
+        move = choice(board.legal_actions(new_state))
+        new_state = board.next_state(new_state, move)
         
     return new_state
 
@@ -189,7 +189,7 @@ def upper_common_bound(node, parent_node, opponent_turn) :
         win_rate = 1 - win_rate
     ucbt = win_rate + (explore_faction * sqrt(log(sp) / si))
     return ucbt
-
+#ENTIRE HEURISTIC MUST BE REDONE
 def heuristic(board, state, move):
     current_identity = board.current_player(state)
     state_resulted_from_move = board.next_state(state, move)

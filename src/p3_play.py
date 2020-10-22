@@ -2,6 +2,7 @@ import sys
 import p3_t3
 import mcts_vanilla
 import mcts_modified
+import mcts_roulette
 import random_bot
 import rollout_bot
 
@@ -21,7 +22,8 @@ players = dict(
     random_bot=random_bot.think,
     rollout_bot=rollout_bot.think,
     mcts_vanilla=mcts_vanilla.think,
-    mcts_modified=mcts_modified.think
+    mcts_modified=mcts_modified.think,
+    mcts_roulette=mcts_roulette.think
 )
 
 board = p3_t3.Board()
