@@ -1,0 +1,37 @@
+CMPM146 Assignment 3 (P3) Experiment 2 Analysis
+Emmanuel Butor and Rammohan Ramanathan
+
+Experiment Setup:
+	- Player 1 will be mcts_modified
+		- Referred to as Modified
+	- Player 2 will be mcts_vanilla
+		- Referred to as Vanilla
+	- 3 tests will be run through p3_sim.py
+		- Each test will perform 100 games
+		- Each test will will evaluate how each MCTS performs with different node sizes
+			- Modified and Vanilla will have the same node size each test
+		- test 1 - 1000 nodes
+		- test 2 - 100 nodes
+		- test 3 - 500 nodes
+
+Experiment Results:
+	- Modified v.s. Vanilla both utilizing 1000 nodes
+		- Modified won 88 games
+		- Vanilla won 12 games
+	- Modified v.s. Vanilla both utilizing 500 nodes
+		- Modified won 84 games
+		- Vanilla won 15 games
+		- 1 Draw
+	- Modified v.s. Vanilla both utilizing 100 nodes
+		- Modified won 71 games
+		- Vanilla won 29 games
+
+Conclusion:
+	At 3 varying node sizes Modified beat Vanilla every single time. 
+	However as the node size increases, there are diminishing returns for the number of wins Modified gains over Vanilla.
+	Even at values lower than 100, Modified still wins majority of the time.
+	Though it is important to note that Modified is about 40% slower than Vanilla. Test was done measuring performance time for a single game against the rollout bot.
+	
+	An unrelated test:
+	[Modified vs Rollout at 100 nodes] consistently outperformed [Vanilla vs Rollout at 100 nodes]
+	[Modified vs Rollout at 1000 nodes] produced similar results to [Vanilla vs Rollout at 1000 nodes]
